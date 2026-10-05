@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Page</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Page content goes here -->
+    <h1>Backend Unit Converter</h1>
+
+    <button class="startForm" id="quickCalc">Quick Calculation</button> 
+    <button class="startForm" id="addJob">Add Job</button>
+
+    <br><br>
+    <div id="formSection">
+        <form name="calcForm">
+            <label for="dispatch-number">Dispatch Number</label><br>
+            <input type="number" id="dispatchNumber"/><br>
+
+            <label for="total-qty">Total Qty</label><br>
+            <input type="number" id="total"><br>
+
+            <label for="units-per-lift">Books per Lift</label><br>
+            <input type="number" id="books" /><br>
+
+            <label for="lifts-per-layer">Lifts per Layer</label><br>
+            <input type="number" id="lifts" /><br>
+
+            <label for="layers-per-skid">Layers per Skid</label><br>
+            <input type="number" id="layers" /><br>
+
+            <button id="calcSubmit">Submit</button>
+        </form>
+        <div id="calcOutput">
+            <h2 id="answer"></h2>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
