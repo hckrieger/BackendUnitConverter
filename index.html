@@ -20,13 +20,19 @@
     <br><br>
     <div id="formSection">
         <form name="calcForm">
-            <label for="dispatch-number">Dispatch Number</label><br>
-            <input type="number" id="dispatchNumber"/><br>
+            <label for="dispatch-number">Dispatch Number:</label><br>
+            <input type="number" id="dispatchNumber"/>
+            <p style="margin:0;">Stack Category:</p>
+            <input type="radio" id="downstack" name="stackCategory" value="Downstack">
+            <label for="downstack">Downstack:</label><br>
+            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack">
+            <label for="carton pack">Carton Pack:</label><br>
 
-            <label for="total-qty">Total Qty</label><br>
+
+            <label for="total-qty">Total Qty:</label><br>
             <input type="number" id="total"><br>
 
-            <label for="units-per-lift">Books per Lift</label><br>
+            <label for="units-per-lift">Books per Lift:</label><br>
             <input type="number" id="books" /><br>
 
             <label for="lifts-per-layer">Lifts per Layer</label><br>
@@ -35,11 +41,12 @@
             <label for="layers-per-skid">Layers per Skid</label><br>
             <input type="number" id="layers" /><br>
 
-            <button id="calcSubmit">Submit</button>
+            <button id="calcSubmit" type="button">Submit</button>
         </form>
-        <div id="calcOutput">
-            <h2 id="answer"></h2>
-        </div>
+
+    </div>
+    <div id="calcOutput">
+        <h2 id="answer"></h2>
     </div>
 
 

@@ -1,4 +1,7 @@
-#calculationForm
+#formSection
 {
     visibility: collapse;
+}
+input[type=number], input[type=radio]:last-child {
+    margin-bottom: 10px;
 }

@@ -8,8 +8,8 @@ quickCalcBtn.addEventListener("click", () => {
     quickCalcForm.style.visibility = "visible";
 });
 
-calcSubmit.addEventListener("click", () => {
-    
+calcSubmit.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
 
     showOutput();
 });
@@ -31,13 +31,24 @@ function calculateOutput(total, unitsInLift, liftsInLayer, layersOnSkid)
     let partialSkidUnitsInFullLefoverLifts = Math.floor(partialSkidUnitsinPartialLayer / unitsInLift);
     let partialSkidUnitsInLeftoverUnits = partialSkidUnitsinPartialLayer - (partialSkidUnitsInFullLefoverLifts * unitsInLift);
 
-    return `Skids: ${fullSkids}\nLayers: ${partialSkidFullLayers}\nList: ${partialSkidUnitsInFullLefoverLifts}\nBooks: ${partialSkidUnitsInLeftoverUnits}`;
+    let stackType = document.querySelector('input[name="stackCategory"]:checked').value;
+    let stackTypeName;
+    if (stackType === "Downstack") {
+        stackTypeName = "Lifts";
+    } else if (stackType === "Carton Pack") {
+        stackTypeName = "Cartons";
+    }
+    return `-Full Skids: ${fullSkids} @ ${unitsInSkid} ${stackTypeName}<br>-Partial Skid: 1 @ ${unitsInPartialSkid} ${stackTypeName}<br><pre>Layers: ${partialSkidFullLayers}<br><pre>Lifts: ${partialSkidUnitsInFullLefoverLifts}<br><pre>Books: ${partialSkidUnitsInLeftoverUnits}`;
 }
 
 
 function showOutput()
 {
-   
-        document.getElementById("answer").innerHTML = calculateOutput(80000, 54, 17, 5);
+        let total = parseFloat(document.getElementById("total").value);
+        let unitsInLift = parseFloat(document.getElementById("books").value);
+        let liftsInLayer = parseFloat(document.getElementById("lifts").value);
+        let layersOnSkid = parseFloat(document.getElementById("layers").value);
+        document.getElementById("answer").innerHTML = calculateOutput(total, unitsInLift, liftsInLayer, layersOnSkid);
+        document.getElementById("answer").style.visibility = "visible";
     
 }
