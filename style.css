@@ -1,7 +1,22 @@
-#formSection
+#formSection, #calcOutput
 {
     visibility: collapse;
 }
-input[type=number], input[type=radio]:last-child {
-    margin-bottom: 10px;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 3px solid #333;
+  padding: 8px;
+  text-align: left;
+}
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
 }

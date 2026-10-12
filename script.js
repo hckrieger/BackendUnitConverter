@@ -1,5 +1,6 @@
 const quickCalcBtn = document.getElementById("quickCalc");
 const quickCalcForm = document.getElementById("formSection");
+const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 
 quickCalcBtn.addEventListener("click", () => {
@@ -10,13 +11,21 @@ quickCalcBtn.addEventListener("click", () => {
 
 calcSubmit.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-
-    showOutput();
+    calcOutput.style.visibility = "visible";
+    calculateOutput();
 });
 
 
-function calculateOutput(total, unitsInLift, liftsInLayer, layersOnSkid)
+
+function calculateOutput()
 {
+    let id = document.getElementById("dispatchNumber").value;
+    let stackType = document.querySelector('input[name="stackCategory"]:checked').value;
+    let total = parseFloat(document.getElementById("total").value);
+    let unitsInLift = parseFloat(document.getElementById("books").value);
+    let liftsInLayer = parseFloat(document.getElementById("lifts").value);
+    let layersOnSkid = parseFloat(document.getElementById("layers").value);
+
     let unitsInLayer = liftsInLayer * unitsInLift;
     let unitsInSkid = unitsInLayer * layersOnSkid;
     let fullSkids = Math.floor(total / unitsInSkid);
@@ -31,24 +40,20 @@ function calculateOutput(total, unitsInLift, liftsInLayer, layersOnSkid)
     let partialSkidUnitsInFullLefoverLifts = Math.floor(partialSkidUnitsinPartialLayer / unitsInLift);
     let partialSkidUnitsInLeftoverUnits = partialSkidUnitsinPartialLayer - (partialSkidUnitsInFullLefoverLifts * unitsInLift);
 
-    let stackType = document.querySelector('input[name="stackCategory"]:checked').value;
     let stackTypeName;
     if (stackType === "Downstack") {
         stackTypeName = "Lifts";
     } else if (stackType === "Carton Pack") {
         stackTypeName = "Cartons";
     }
-    return `-Full Skids: ${fullSkids} @ ${unitsInSkid} ${stackTypeName}<br>-Partial Skid: 1 @ ${unitsInPartialSkid} ${stackTypeName}<br><pre>Layers: ${partialSkidFullLayers}<br><pre>Lifts: ${partialSkidUnitsInFullLefoverLifts}<br><pre>Books: ${partialSkidUnitsInLeftoverUnits}`;
-}
-
-
-function showOutput()
-{
-        let total = parseFloat(document.getElementById("total").value);
-        let unitsInLift = parseFloat(document.getElementById("books").value);
-        let liftsInLayer = parseFloat(document.getElementById("lifts").value);
-        let layersOnSkid = parseFloat(document.getElementById("layers").value);
-        document.getElementById("answer").innerHTML = calculateOutput(total, unitsInLift, liftsInLayer, layersOnSkid);
-        document.getElementById("answer").style.visibility = "visible";
     
+    document.getElementById("calcOutput").style.visibility = "visible";
+    document.querySelector(".id").textContent = `${id}`;
+    document.querySelector(".quick-info").innerHTML = `${fullSkids} Skids<br>${partialSkidFullLayers} Layers<br>${partialSkidUnitsInFullLefoverLifts} ${stackTypeName}<br>${partialSkidUnitsInLeftoverUnits} Books`;
+    document.querySelector(".lift-qty").textContent = `${unitsInLift}`;
+    document.querySelector(".lifts-in-layer").textContent = `${liftsInLayer}`;
+    document.querySelector(".layer-qty").textContent = `${unitsInLayer}`;
+    document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
+    document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
+
 }

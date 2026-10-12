@@ -20,33 +20,56 @@
     <br><br>
     <div id="formSection">
         <form name="calcForm">
-            <label for="dispatch-number">Dispatch Number:</label><br>
-            <input type="number" id="dispatchNumber"/>
-            <p style="margin:0;">Stack Category:</p>
+            <label for="dispatch-number">Id:</label>
+            <input type="number" id="dispatchNumber" value="6"/>
+            <label>Stack Category:</label>
             <input type="radio" id="downstack" name="stackCategory" value="Downstack">
-            <label for="downstack">Downstack:</label><br>
-            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack">
-            <label for="carton pack">Carton Pack:</label><br>
+            <label style="display: inline; margin: 0;" for="downstack">Downstack:</label>
+            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack" checked>
+            <label style="display: inline; margin: 0;" for="carton pack" id="carton-pack-label">Carton Pack:</label>
 
 
-            <label for="total-qty">Total Qty:</label><br>
-            <input type="number" id="total"><br>
+            <label for="total-qty">Total Qty:</label>
+            <input type="number" id="total" value="23456">
 
-            <label for="units-per-lift">Books per Lift:</label><br>
-            <input type="number" id="books" /><br>
+            <label for="units-per-lift">Books per Lift:</label>
+            <input type="number" id="books" value="66"/>
 
-            <label for="lifts-per-layer">Lifts per Layer</label><br>
-            <input type="number" id="lifts" /><br>
+            <label for="lifts-per-layer">Lifts per Layer</label>
+            <input type="number" id="lifts" value="16"/>
 
-            <label for="layers-per-skid">Layers per Skid</label><br>
-            <input type="number" id="layers" /><br>
-
-            <button id="calcSubmit" type="button">Submit</button>
+            <label for="layers-per-skid">Layers per Skid</label>
+            <input type="number" id="layers" value="4"/>
+            <br>
+            <button id="calcSubmit" type="button" style="margin-top: 5px;">Submit</button>
         </form>
 
     </div>
-    <div id="calcOutput">
-        <h2 id="answer"></h2>
+    <div id="calcOutput" style="margin-top: 10px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Quick Info</th>
+                    <th>Lift Qty</th>
+                    <th>Lifts in Layer</th>
+                    <th>Layer Qty</th>
+                    <th>Full Skid Qty</th>
+                    <th>Partial Skid Qty</th>
+                </tr>
+            </thead>
+            <tbody id="jobTableBody">
+                <tr>
+                    <td class="id">6</td>
+                    <td class="quick-info"></td>
+                    <td class="lift-qty"></td>
+                    <td class="lifts-in-layer"></td>
+                    <td class="layer-qty"></td>
+                    <td class="full-skid-qty"></td>
+                    <td class="partial-skid-qty"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 
