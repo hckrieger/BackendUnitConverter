@@ -1,11 +1,11 @@
 const quickCalcBtn = document.getElementById("quickCalc");
-const quickCalcForm = document.getElementById("formSection");
+const quickCalcForm = document.getElementById("calcForm");
+const addJobBtn = document.getElementById("addJob");
+const addJobForm = document.getElementById("addJobForm")
 const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 
 quickCalcBtn.addEventListener("click", () => {
-    
-
     quickCalcForm.style.visibility = "visible";
 });
 
@@ -15,7 +15,14 @@ calcSubmit.addEventListener("click", (event) => {
     calculateOutput();
 });
 
+addJobBtn.addEventListener("click", () => {
+    addJobForm.style.visibility = "visible";
+});
 
+addJobForm.addEventListener("click", (event) => {
+    event.preventDefault();
+    //Create function for adding event
+})
 
 function calculateOutput()
 {
@@ -25,6 +32,8 @@ function calculateOutput()
     let unitsInLift = parseFloat(document.getElementById("books").value);
     let liftsInLayer = parseFloat(document.getElementById("lifts").value);
     let layersOnSkid = parseFloat(document.getElementById("layers").value);
+
+    
 
     let unitsInLayer = liftsInLayer * unitsInLift;
     let unitsInSkid = unitsInLayer * layersOnSkid;
@@ -49,11 +58,21 @@ function calculateOutput()
     
     document.getElementById("calcOutput").style.visibility = "visible";
     document.querySelector(".id").textContent = `${id}`;
-    document.querySelector(".quick-info").innerHTML = `${fullSkids} Skids<br>${partialSkidFullLayers} Layers<br>${partialSkidUnitsInFullLefoverLifts} ${stackTypeName}<br>${partialSkidUnitsInLeftoverUnits} Books`;
+
+    document.querySelector(".full-skid-qty-quick").innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
+
+    
+    document.querySelector(".partial-skid-full-layers").innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
+
+    document.querySelector(".partial-skid-units-in-leftover-lifts").innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
+
+    document.querySelector(".partial-skid-units-in-leftover-books").innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
+
     document.querySelector(".lift-qty").textContent = `${unitsInLift}`;
     document.querySelector(".lifts-in-layer").textContent = `${liftsInLayer}`;
     document.querySelector(".layer-qty").textContent = `${unitsInLayer}`;
     document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
+    document.querySelector(".full-layers").textContent = `${layersOnSkid}`
     document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
 
 }

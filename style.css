@@ -1,4 +1,4 @@
-#formSection, #calcOutput
+#calcOutput, #calcForm, #addJobForm
 {
     visibility: collapse;
 }

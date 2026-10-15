@@ -19,7 +19,16 @@
 
     <br><br>
     <div id="formSection">
-        <form name="calcForm">
+        <form id="addJobForm">
+            <label for="job-number">Job Number:</label>
+            <input type="number" id="job-number" name="job-number" />
+
+            <label for="customer">Customer</label>
+            <input type="number" id="customer" name="customer" />
+            <br>
+            <button id="jobSubmit" type="button" style="margin-top: 5px;">Submit</button>
+        </form>
+        <form id="calcForm">
             <label for="dispatch-number">Id:</label>
             <input type="number" id="dispatchNumber" value="6"/>
             <label>Stack Category:</label>
@@ -54,6 +63,7 @@
                     <th>Lift Qty</th>
                     <th>Lifts in Layer</th>
                     <th>Layer Qty</th>
+                    <th>Full Layers</th>
                     <th>Full Skid Qty</th>
                     <th>Partial Skid Qty</th>
                 </tr>
@@ -61,10 +71,16 @@
             <tbody id="jobTableBody">
                 <tr>
                     <td class="id">6</td>
-                    <td class="quick-info"></td>
+                    <td class="quick-info">
+                        <span class="full-skid-qty-quick"></span>
+                        <span class="partial-skid-full-layers"></span>
+                        <span class="partial-skid-units-in-leftover-lifts"></span>
+                        <span class="partial-skid-units-in-leftover-books"></span>
+                    </td>
                     <td class="lift-qty"></td>
                     <td class="lifts-in-layer"></td>
                     <td class="layer-qty"></td>
+                    <td class="full-layers"></td>
                     <td class="full-skid-qty"></td>
                     <td class="partial-skid-qty"></td>
                 </tr>
