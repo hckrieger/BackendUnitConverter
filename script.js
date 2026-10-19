@@ -4,16 +4,17 @@ const addJobBtn = document.getElementById("addJob");
 const addJobForm = document.getElementById("addJobForm")
 const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
+const jobSubmit = document.getElementById("jobSubmit");
 
 
 
-const jobMap = new Map();
+let jobsArray = []
 
 class Job {
     constructor(jobName, jobNumber)
     {
-        this.jobMap,
-        this.jobNumber
+        this.jobName = jobName,
+        this.jobNumber = jobNumber
 
         let dispatches = new Set();
     }
@@ -30,7 +31,7 @@ class Dispatch {
     }
 }
 
-localStorage.setItem("jobs", jobMap);
+localStorage.setItem("jobs", jobsList);
 
 
 quickCalcBtn.addEventListener("click", () => {
@@ -50,9 +51,15 @@ addJobBtn.addEventListener("click", () => {
     calcOutput.style.display = "none";
 });
 
-addJobForm.addEventListener("click", (event) => {
+jobSubmit.addEventListener("click", (event) => {
     event.preventDefault();
     //Create function for adding event
+    let jobNumber = document.getElementById("jobNumber").value;
+    let jobName = document.getElementById("jobName").value;
+    let job = new Job(jobName, jobNumber);
+    jobsArray.push(job);
+
+    let jobListElement = document.getElementById("jobList");
 })
 
 function calculateOutput()

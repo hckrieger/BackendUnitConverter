@@ -21,10 +21,10 @@
     <div id="formSection">
         <form id="addJobForm">
             <label for="job-number">Job Number:</label>
-            <input type="number" id="job-number" name="job-number" />
+            <input type="number" id="jobNumber" name="job-number" />
 
-            <label for="customer">Customer</label>
-            <input type="number" id="customer" name="customer" />
+            <label for="customer">Name</label>
+            <input type="text" id="jobName" name="name" />
             <br>
             <button id="jobSubmit" type="button" style="margin-top: 5px;">Submit</button>
         </form>
@@ -57,9 +57,9 @@
     <div id="jobsDisplay">
         <h2>Jobs</h2>
         <div id="specificJobs">
-            <script>
-                
-            </script>
+            <ul id="jobList">
+        
+            </ul>
         </div>
     </div>
     <div id="calcOutput" style="margin-top: 10px;">
