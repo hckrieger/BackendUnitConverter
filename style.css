@@ -1,6 +1,6 @@
-#calcOutput, #calcForm, #addJobForm
+#calcOutput, #calcForm, #addJobForm, #jobDisplay
 {
-    visibility: collapse;
+    display: none;
 }
 
 table {

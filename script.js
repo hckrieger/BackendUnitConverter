@@ -5,18 +5,49 @@ const addJobForm = document.getElementById("addJobForm")
 const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 
+
+
+const jobMap = new Map();
+
+class Job {
+    constructor(jobName, jobNumber)
+    {
+        this.jobMap,
+        this.jobNumber
+
+        let dispatches = new Set();
+    }
+}
+
+class Dispatch {
+    constructor(id, total, booksInLift, liftsInLayer, layersOnSkid)
+    {
+        this.id = id;
+        this.total = total;
+        this.booksInLift = booksInLift;
+        this.liftsInLayer = liftsInLayer;
+        this.layersOnSkid = layersOnSkid;
+    }
+}
+
+localStorage.setItem("jobs", jobMap);
+
+
 quickCalcBtn.addEventListener("click", () => {
-    quickCalcForm.style.visibility = "visible";
+    quickCalcForm.style.display = "inline";
+    addJobForm.style.display = "none";
 });
 
 calcSubmit.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-    calcOutput.style.visibility = "visible";
+    calcOutput.style.display = "inline";
     calculateOutput();
 });
 
 addJobBtn.addEventListener("click", () => {
-    addJobForm.style.visibility = "visible";
+    addJobForm.style.display = "inline";
+    quickCalcForm.style.display = "none";
+    calcOutput.style.display = "none";
 });
 
 addJobForm.addEventListener("click", (event) => {
@@ -75,4 +106,5 @@ function calculateOutput()
     document.querySelector(".full-layers").textContent = `${layersOnSkid}`
     document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
 
+    
 }
