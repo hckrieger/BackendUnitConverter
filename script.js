@@ -31,7 +31,7 @@ class Dispatch {
     }
 }
 
-localStorage.setItem("jobs", jobsList);
+localStorage.setItem("jobs", jobsArray);
 
 
 quickCalcBtn.addEventListener("click", () => {
@@ -49,6 +49,7 @@ addJobBtn.addEventListener("click", () => {
     addJobForm.style.display = "inline";
     quickCalcForm.style.display = "none";
     calcOutput.style.display = "none";
+    
 });
 
 jobSubmit.addEventListener("click", (event) => {
@@ -59,7 +60,22 @@ jobSubmit.addEventListener("click", (event) => {
     let job = new Job(jobName, jobNumber);
     jobsArray.push(job);
 
-    let jobListElement = document.getElementById("jobList");
+    
+    // Later get it where it displays jobs in reverse order
+    // ...so that the most recent job is at the top of the list
+    let ul = document.getElementById("jobList");
+    let li = document.createElement("li");
+    li.textContent = `${job.jobName} - ${job.jobNumber}`;
+
+
+    ul.appendChild(li);
+
+    if (jobsArray.length > 0) {
+        document.getElementById("jobsDisplay").style.display = "block";
+    }
+
+    addJobForm.reset();
+    addJobForm.style.display = "none";
 })
 
 function calculateOutput()

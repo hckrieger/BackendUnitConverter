@@ -20,3 +20,15 @@ label {
   display: block;
   margin-top: 10px;
 }
+
+#jobList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#jobList > li
+{
+  display: inline-block;
+  margin-right: 25px;
+}
