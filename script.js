@@ -6,9 +6,11 @@ const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 const jobSubmit = document.getElementById("jobSubmit");
 
-
+const pathName = window.location.pathname;
 
 let jobsArray = []
+
+let selectedJob;
 
 class Job {
     constructor(jobName, jobNumber)
@@ -60,13 +62,16 @@ jobSubmit.addEventListener("click", (event) => {
     let job = new Job(jobName, jobNumber);
     jobsArray.push(job);
 
-    
+
     // Later get it where it displays jobs in reverse order
     // ...so that the most recent job is at the top of the list
     let ul = document.getElementById("jobList");
     let li = document.createElement("li");
-    li.textContent = `${job.jobName} - ${job.jobNumber}`;
 
+    let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}`;
+    li.innerHTML = `<a href='${pathWithParams}'>${job.jobNumber} - ${job.jobName}</a>`;
+
+    selectedJob = job.jobNumber;
 
     ul.appendChild(li);
 
