@@ -33,7 +33,8 @@ class Dispatch {
     }
 }
 
-localStorage.setItem("jobs", jobsArray);
+
+
 
 
 quickCalcBtn.addEventListener("click", () => {
@@ -62,7 +63,10 @@ jobSubmit.addEventListener("click", (event) => {
     let job = new Job(jobName, jobNumber);
     jobsArray.push(job);
 
-
+    localStorage.setItem("jobs", JSON.stringify(jobsArray));
+        
+    let xdl = localStorage.getItem("jobs");
+    
     // Later get it where it displays jobs in reverse order
     // ...so that the most recent job is at the top of the list
     let ul = document.getElementById("jobList");
