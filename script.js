@@ -1,5 +1,5 @@
 const quickCalcBtn = document.getElementById("quickCalc");
-const quickCalcForm = document.getElementById("calcForm");
+const calcForm = document.getElementById("calcForm");
 const addJobBtn = document.getElementById("addJob");
 const addJobForm = document.getElementById("addJobForm")
 const calcOutput = document.getElementById("calcOutput");
@@ -10,7 +10,7 @@ const pathName = window.location.pathname;
 
 let jobsArray = []
 
-let selectedJob;
+let selectedJob = null;
 
 class Job {
     constructor(jobName, jobNumber)
@@ -33,12 +33,34 @@ class Dispatch {
     }
 }
 
+if (localStorage.getItem("jobs") != null)
+{
+    jobsArray = JSON.parse(localStorage.getItem("jobs"));
+        // Later get it where it displays jobs in reverse order
+    // ...so that the most recent job is at the top of the list
+    let ul = document.getElementById("jobList");
+    
+    jobsArray.reverse();
+
+    for (let i = 0; i < jobsArray.length; i++)
+    {
+        document.getElementById("jobsDisplay").style.display = "block";
+        let li = document.createElement("li");
+        var job = jobsArray[i];
+        let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}`;
+        li.innerHTML = `<a href='${pathWithParams}'>${job.jobNumber} - ${job.jobName}</a>`;
+        ul.appendChild(li);
+    }
+
+
+}
+
 
 
 
 
 quickCalcBtn.addEventListener("click", () => {
-    quickCalcForm.style.display = "inline";
+    calcForm.style.display = "inline";
     addJobForm.style.display = "none";
 });
 
@@ -50,7 +72,7 @@ calcSubmit.addEventListener("click", (event) => {
 
 addJobBtn.addEventListener("click", () => {
     addJobForm.style.display = "inline";
-    quickCalcForm.style.display = "none";
+    calcForm.style.display = "none";
     calcOutput.style.display = "none";
     
 });
@@ -65,8 +87,7 @@ jobSubmit.addEventListener("click", (event) => {
 
     localStorage.setItem("jobs", JSON.stringify(jobsArray));
         
-    let xdl = localStorage.getItem("jobs");
-    
+  
     // Later get it where it displays jobs in reverse order
     // ...so that the most recent job is at the top of the list
     let ul = document.getElementById("jobList");
@@ -85,7 +106,13 @@ jobSubmit.addEventListener("click", (event) => {
 
     addJobForm.reset();
     addJobForm.style.display = "none";
+
+    calcForm.style.display = "block";
+
+
 })
+
+
 
 function calculateOutput()
 {

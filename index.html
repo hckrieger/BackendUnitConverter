@@ -28,13 +28,21 @@
             <br>
             <button id="jobSubmit" type="button" style="margin-top: 5px;">Submit</button>
         </form>
+        <div id="jobsDisplay">
+            <h2>Jobs</h2>
+            <div id="specificJobs">
+                <ul id="jobList">
+            
+                </ul>
+            </div>
+        </div>
         <form id="calcForm">
             <label for="dispatch-number">Id:</label>
-            <input type="number" id="dispatchNumber" value="6"/>
+            <input type="number" id="dispatchNumber"/>
             <label>Stack Category:</label>
             <input type="radio" id="downstack" name="stackCategory" value="Downstack">
             <label style="display: inline; margin: 0;" for="downstack">Downstack:</label>
-            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack" checked>
+            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack">
             <label style="display: inline; margin: 0;" for="carton pack" id="carton-pack-label">Carton Pack:</label>
 
 
@@ -53,14 +61,6 @@
             <button id="calcSubmit" type="button" style="margin-top: 5px;">Submit</button>
         </form>
 
-    </div>
-    <div id="jobsDisplay">
-        <h2>Jobs</h2>
-        <div id="specificJobs">
-            <ul id="jobList">
-        
-            </ul>
-        </div>
     </div>
     <div id="calcOutput" style="margin-top: 10px;">
         <table>
