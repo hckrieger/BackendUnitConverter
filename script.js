@@ -6,9 +6,10 @@ const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 const jobSubmit = document.getElementById("jobSubmit");
 
-const pathName = window.location.href;
+const pathName = window.location.pathname;
+const hrefName = window.location.href;
 
-const urlParams = new URL(pathName);
+const urlParams = new URL(hrefName);
 
 let jobsArray = []
 
@@ -63,7 +64,7 @@ let jobNumber = urlParams.searchParams.get("jobNumber");
 let jobName = urlParams.searchParams.get("jobName");
 if (jobNumber != null || jobName != null)
 {
-    console.debug(`${jobNumber} - ${jobName}`);
+    console.debug(`${jobNumber}`);
 }
 
 
