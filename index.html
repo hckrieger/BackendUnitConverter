@@ -18,50 +18,50 @@
     <button class="startForm" id="addJob">Add Job</button>
 
     <br><br>
-    <div id="formSection">
-        <form id="addJobForm">
-            <label for="job-number">Job Number:</label>
-            <input type="number" id="jobNumber" name="job-number" />
+    <form id="addJobForm">
+        <label for="job-number">Job Number:</label>
+        <input type="number" id="jobNumber" name="job-number" />
 
-            <label for="customer">Name</label>
-            <input type="text" id="jobName" name="name" />
-            <br>
-            <button id="jobSubmit" type="button" style="margin-top: 5px;">Submit</button>
-        </form>
-        <div id="jobsDisplay">
-            <h2>Jobs</h2>
-            <div id="specificJobs">
-                <ul id="jobList">
-            
-                </ul>
-            </div>
+        <label for="customer">Name</label>
+        <input type="text" id="jobName" name="name" />
+        <br>
+        <button id="jobSubmit" type="button" style="margin-top: 5px;">Submit</button>
+    </form>
+    <div id="jobsDisplay">
+        <h2>Jobs</h2>
+        <div id="specificJobs">
+            <ul id="jobList">
+        
+            </ul>
         </div>
-        <form id="calcForm">
-            <label for="dispatch-number">Id:</label>
-            <input type="number" id="dispatchNumber"/>
-            <label>Stack Category:</label>
-            <input type="radio" id="downstack" name="stackCategory" value="Downstack">
-            <label style="display: inline; margin: 0;" for="downstack">Downstack:</label>
-            <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack">
-            <label style="display: inline; margin: 0;" for="carton pack" id="carton-pack-label">Carton Pack:</label>
-
-
-            <label for="total-qty">Total Qty:</label>
-            <input type="number" id="total">
-
-            <label for="units-per-lift">Books per Lift:</label>
-            <input type="number" id="books"/>
-
-            <label for="lifts-per-layer">Lifts per Layer</label>
-            <input type="number" id="lifts"/>
-
-            <label for="layers-per-skid">Layers per Skid</label>
-            <input type="number" id="layers"/>
-            <br>
-            <button id="calcSubmit" type="button" style="margin-top: 5px;">Submit</button>
-        </form>
-
     </div>
+
+    <h2 id="jobNumberHeader"></h2>
+    <h2 id="jobNameHeader"></h2>
+    <form id="calcForm">
+        <label for="dispatch-number">Id:</label>
+        <input type="number" id="dispatchNumber"/>
+        <label>Stack Category:</label>
+        <input type="radio" id="downstack" name="stackCategory" value="Downstack">
+        <label style="display: inline; margin: 0;" for="downstack">Downstack:</label>
+        <input type="radio" id="carton pack" name="stackCategory" value="Carton Pack">
+        <label style="display: inline; margin: 0;" for="carton pack" id="carton-pack-label">Carton Pack:</label>
+
+
+        <label for="total-qty">Total Qty:</label>
+        <input type="number" id="total">
+
+        <label for="units-per-lift">Books per Lift:</label>
+        <input type="number" id="books"/>
+
+        <label for="lifts-per-layer">Lifts per Layer</label>
+        <input type="number" id="lifts"/>
+
+        <label for="layers-per-skid">Layers per Skid</label>
+        <input type="number" id="layers"/>
+        <br>
+        <button id="calcSubmit" type="button" style="margin-top: 5px;">Submit</button>
+    </form>
     <div id="calcOutput" style="margin-top: 10px;">
         <table>
             <thead>

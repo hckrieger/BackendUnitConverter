@@ -6,11 +6,15 @@ const calcOutput = document.getElementById("calcOutput");
 const calcSubmit = document.getElementById("calcSubmit");
 const jobSubmit = document.getElementById("jobSubmit");
 
-const pathName = window.location.pathname;
+const pathName = window.location.href;
+
+const urlParams = new URL(pathName);
 
 let jobsArray = []
 
 let selectedJob = null;
+
+//localStorage.removeItem("jobs");
 
 class Job {
     constructor(jobName, jobNumber)
@@ -55,21 +59,29 @@ if (localStorage.getItem("jobs") != null)
 
 }
 
+let jobNumber = urlParams.searchParams.get("jobNumber");
+let jobName = urlParams.searchParams.get("jobName");
+if (jobNumber != null || jobName != null)
+{
+    console.debug(`${jobNumber} - ${jobName}`);
+}
 
 
-
-
+//Make calclculation form appear
 quickCalcBtn.addEventListener("click", () => {
     calcForm.style.display = "inline";
     addJobForm.style.display = "none";
 });
 
+//submit form data
 calcSubmit.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
     calcOutput.style.display = "inline";
     calculateOutput();
 });
 
+
+//Make add job form appear
 addJobBtn.addEventListener("click", () => {
     addJobForm.style.display = "inline";
     calcForm.style.display = "none";
@@ -77,39 +89,43 @@ addJobBtn.addEventListener("click", () => {
     
 });
 
+//Submit new job
 jobSubmit.addEventListener("click", (event) => {
     event.preventDefault();
     //Create function for adding event
     let jobNumber = document.getElementById("jobNumber").value;
     let jobName = document.getElementById("jobName").value;
-    let job = new Job(jobName, jobNumber);
-    jobsArray.push(job);
-
-    localStorage.setItem("jobs", JSON.stringify(jobsArray));
+    
+    
+    //Add form validation feedback eventually
+    if (jobNumber !== '' && jobName !== '')
+    {
+        job = new Job(jobName, jobNumber);
+        jobsArray.push(job);
+        localStorage.setItem("jobs", JSON.stringify(jobsArray));
         
-  
-    // Later get it where it displays jobs in reverse order
-    // ...so that the most recent job is at the top of the list
-    let ul = document.getElementById("jobList");
-    let li = document.createElement("li");
+        // Later get it where it displays jobs in reverse order
+        // ...so that the most recent job is at the top of the list
+        let ul = document.getElementById("jobList");
+        let li = document.createElement("li");
 
-    let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}`;
-    li.innerHTML = `<a href='${pathWithParams}'>${job.jobNumber} - ${job.jobName}</a>`;
+        let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}`;
+        li.innerHTML = `<a href='${pathWithParams}'>${job.jobNumber} - ${job.jobName}</a>`;
 
-    selectedJob = job.jobNumber;
+        selectedJob = job.jobNumber;
 
-    ul.appendChild(li);
+        ul.appendChild(li);
 
-    if (jobsArray.length > 0) {
-        document.getElementById("jobsDisplay").style.display = "block";
+        if (jobsArray.length > 0) {
+            document.getElementById("jobsDisplay").style.display = "block";
+        }
+
+        addJobForm.reset();
+        addJobForm.style.display = "none";
+
+        calcForm.style.display = "block";
     }
-
-    addJobForm.reset();
-    addJobForm.style.display = "none";
-
-    calcForm.style.display = "block";
-
-
+    
 })
 
 
