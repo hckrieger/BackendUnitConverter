@@ -52,21 +52,12 @@ if (localStorage.getItem("jobs") != null)
         document.getElementById("jobsDisplay").style.display = "block";
         let li = document.createElement("li");
         var job = jobsArray[i];
-        let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}`;
+        let pathWithParams = `${pathName}?jobNumber=${job.jobNumber}&jobName=${job.jobName}`;
         li.innerHTML = `<a href='${pathWithParams}'>${job.jobNumber} - ${job.jobName}</a>`;
         ul.appendChild(li);
     }
 
-
 }
-
-let jobNumber = urlParams.searchParams.get("jobNumber");
-let jobName = urlParams.searchParams.get("jobName");
-if (jobNumber != null || jobName != null)
-{
-    console.debug(`${jobNumber}`);
-}
-
 
 //Make calclculation form appear
 quickCalcBtn.addEventListener("click", () => {
@@ -130,6 +121,19 @@ jobSubmit.addEventListener("click", (event) => {
 })
 
 
+let jobNumber = urlParams.searchParams.get("jobNumber");
+let jobName = urlParams.searchParams.get("jobName");
+if (jobNumber !== null)
+{
+    document.getElementById("jobNumberHeader").textContent = jobNumber;
+
+    if (jobName !== null)
+    {
+        document.getElementById("jobNameHeader").textContent = jobName;
+    }
+
+    calcForm.style.display = "block";
+}
 
 function calculateOutput()
 {
