@@ -63,6 +63,8 @@ if (localStorage.getItem("jobs") != null)
 quickCalcBtn.addEventListener("click", () => {
     calcForm.style.display = "inline";
     addJobForm.style.display = "none";
+    document.getElementById("jobNumberHeader").textContent = "";
+    document.getElementById("jobNameHeader").textContent = "";
 });
 
 //submit form data
@@ -78,7 +80,8 @@ addJobBtn.addEventListener("click", () => {
     addJobForm.style.display = "inline";
     calcForm.style.display = "none";
     calcOutput.style.display = "none";
-    
+    document.getElementById("jobNumberHeader").textContent = "";
+    document.getElementById("jobNameHeader").textContent = "";
 });
 
 //Submit new job
@@ -131,6 +134,8 @@ if (jobNumber !== null)
     {
         document.getElementById("jobNameHeader").textContent = jobName;
     }
+
+    
 
     calcForm.style.display = "block";
 }
@@ -185,6 +190,15 @@ function calculateOutput()
     document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
     document.querySelector(".full-layers").textContent = `${layersOnSkid}`
     document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
+
+
+    if (selectedJob != null)
+    {
+        let dispatch = new Dispatch(id, total, booksInLift, liftsInLayer, layersOnSkid);
+        selectedJob.dispatches.appendChild(dispatch);
+        localStorage.setItem("jobs", jobsArray);
+    }
+    
 
     
 }
