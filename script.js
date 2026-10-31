@@ -18,12 +18,17 @@ let selectedJob = null;
 //localStorage.removeItem("jobs");
 
 class Job {
+    
     constructor(jobName, jobNumber)
     {
         this.jobName = jobName,
         this.jobNumber = jobNumber
+        this.dispatches = [];
+        
+    }
 
-        let dispatches = new Set();
+    addDispatch(dispatch) {
+        this.dispatches.push(dispatch);
     }
 }
 
@@ -135,7 +140,14 @@ if (jobNumber !== null)
         document.getElementById("jobNameHeader").textContent = jobName;
     }
 
-    
+    for (let i = 0; i < jobsArray.length; i++)
+    {
+        let job = jobsArray[i];
+        if (job.jobNumber === jobNumber)
+        {
+            selectedJob = job;
+        }
+    }
 
     calcForm.style.display = "block";
 }
@@ -194,8 +206,8 @@ function calculateOutput()
 
     if (selectedJob != null)
     {
-        let dispatch = new Dispatch(id, total, booksInLift, liftsInLayer, layersOnSkid);
-        selectedJob.dispatches.appendChild(dispatch);
+        let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid);
+        selectedJob.addDispatch(dispatch);
         localStorage.setItem("jobs", jobsArray);
     }
     
