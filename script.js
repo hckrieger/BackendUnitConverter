@@ -12,10 +12,13 @@ const hrefName = window.location.href;
 const urlParams = new URL(hrefName);
 
 let jobsArray = []
+let dispatchArray = [];
 
 let selectedJob = null;
 
 //localStorage.removeItem("jobs");
+
+let jobId = 0;
 
 class Job {
     
@@ -23,23 +26,19 @@ class Job {
     {
         this.jobName = jobName,
         this.jobNumber = jobNumber
-        this.dispatches = [];
-        
-    }
-
-    addDispatch(dispatch) {
-        this.dispatches.push(dispatch);
+        this.jobId = jobId++;
     }
 }
 
 class Dispatch {
-    constructor(id, total, booksInLift, liftsInLayer, layersOnSkid)
+    constructor(id, total, booksInLift, liftsInLayer, layersOnSkid, jobId)
     {
         this.id = id;
         this.total = total;
         this.booksInLift = booksInLift;
         this.liftsInLayer = liftsInLayer;
         this.layersOnSkid = layersOnSkid;
+        this.jobId = jobId;
     }
 }
 
@@ -206,9 +205,9 @@ function calculateOutput()
 
     if (selectedJob != null)
     {
-        let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid);
-        selectedJob.addDispatch(dispatch);
-        localStorage.setItem("jobs", jobsArray);
+        let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
+        dispatchArray.push(dispatch);
+        localStorage.setItem("jobs", dispatchArray);
     }
     
 
