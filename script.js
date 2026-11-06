@@ -182,7 +182,8 @@ function calculateOutput()
     } else if (stackType === "Carton Pack") {
         stackTypeName = "Cartons";
     }
-    
+
+
     document.getElementById("calcOutput").style.visibility = "visible";
     document.querySelector(".id").textContent = `${id}`;
 
@@ -202,9 +203,37 @@ function calculateOutput()
     document.querySelector(".full-layers").textContent = `${layersOnSkid}`
     document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
 
-
     if (selectedJob != null)
     {
+        let tr = document.createElement("tr");
+
+        let tdId = document.createElement("td");
+        let tdQuickInfo = document.createElement("td");
+        let tdLiftQty = document.createElement("td");
+        let tdLiftsInLayer = document.createElement("td");
+        let tdLayerQty = document.createElement("td");
+        let tdFullLayers = document.createElement("td");
+        let tdFullSkidQty = document.createElement("td");
+        let tdPartialSkidQty = document.createElement("td");
+
+        tdId.textContent = id;
+        tr.appendChild(tdId);
+
+
+        tdLiftQty.textContent = unitsInLift;
+        tr.appendChild(tdLiftQty);
+
+        tdLiftsInLayer.textContent = liftsInLayer;
+        tr.appendChild(tdLiftsInLayer);
+
+        tdLayerQty.textContent = unitsInLayer;
+        tr.appendChild(tdLayerQty);
+
+        tdFullLayers.textContent = partialSkidFullLayers;
+        tr.appendChild(tdFullLayers);
+
+
+  
         let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
         dispatchArray.push(dispatch);
         localStorage.setItem("jobs", dispatchArray);
