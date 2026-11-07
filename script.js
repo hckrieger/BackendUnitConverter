@@ -19,7 +19,7 @@ let selectedJob = null;
 //localStorage.removeItem("jobs"); 
 //localStorage.removeItem("dispatches");
 
-let jobId = 0;
+let currentJobId = 0;
 
 class Job {
     
@@ -27,7 +27,7 @@ class Job {
     {
         this.jobName = jobName,
         this.jobNumber = jobNumber
-        this.jobId = jobId++;
+        this.jobId = currentJobId++;
     }
 }
 
@@ -62,6 +62,10 @@ if (localStorage.getItem("jobs") != null)
         ul.appendChild(li);
     }
 
+    if (localStorage.getItem("dispatches") != null)
+    {
+        dispatchArray = JSON.parse(localStorage.getItem("dispatches"));
+    }
 }
 
 //Make calclculation form appear
@@ -263,13 +267,14 @@ function calculateOutput()
 
 
 
-
+        
   
         let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
         dispatchArray.push(dispatch);
-        localStorage.setItem("dispatches", dispatchArray);
+        localStorage.setItem("dispatches", JSON.stringify(dispatchArray));
     }
     
+
 
     
 }
