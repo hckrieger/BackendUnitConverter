@@ -16,7 +16,8 @@ let dispatchArray = [];
 
 let selectedJob = null;
 
-//localStorage.removeItem("jobs");
+//localStorage.removeItem("jobs"); 
+//localStorage.removeItem("dispatches");
 
 let jobId = 0;
 
@@ -184,28 +185,30 @@ function calculateOutput()
     }
 
 
-    document.getElementById("calcOutput").style.visibility = "visible";
-    document.querySelector(".id").textContent = `${id}`;
+    // document.getElementById("calcOutput").style.visibility = "visible";
+    // document.querySelector(".id").textContent = `${id}`;
 
-    document.querySelector(".full-skid-qty-quick").innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
+    // document.querySelector(".full-skid-qty-quick").innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
 
     
-    document.querySelector(".partial-skid-full-layers").innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
+    // document.querySelector(".partial-skid-full-layers").innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
 
-    document.querySelector(".partial-skid-units-in-leftover-lifts").innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
+    // document.querySelector(".partial-skid-units-in-leftover-lifts").innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
 
-    document.querySelector(".partial-skid-units-in-leftover-books").innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
+    // document.querySelector(".partial-skid-units-in-leftover-books").innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
 
-    document.querySelector(".lift-qty").textContent = `${unitsInLift}`;
-    document.querySelector(".lifts-in-layer").textContent = `${liftsInLayer}`;
-    document.querySelector(".layer-qty").textContent = `${unitsInLayer}`;
-    document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
-    document.querySelector(".full-layers").textContent = `${layersOnSkid}`
-    document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
+    // document.querySelector(".lift-qty").textContent = `${unitsInLift}`;
+    // document.querySelector(".lifts-in-layer").textContent = `${liftsInLayer}`;
+    // document.querySelector(".layer-qty").textContent = `${unitsInLayer}`;
+    // document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
+    // document.querySelector(".full-layers").textContent = `${layersOnSkid}`
+    // document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
 
     if (selectedJob != null)
     {
+        let jobTableBody = document.getElementById("jobTableBody");
         let tr = document.createElement("tr");
+        jobTableBody.appendChild(tr);
 
         let tdId = document.createElement("td");
         let tdQuickInfo = document.createElement("td");
@@ -218,6 +221,26 @@ function calculateOutput()
 
         tdId.textContent = id;
         tr.appendChild(tdId);
+
+        let dispatchStorage = localStorage.getItem("dispatches");
+
+        let spanFullSkids = document.createElement("span");
+        spanFullSkids.innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
+        tdQuickInfo.appendChild(spanFullSkids);
+
+        let spanFullLayers = document.createElement("span");
+        spanFullLayers.innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
+        tdQuickInfo.appendChild(spanFullLayers);
+        
+        let spanLeftOverLifts = document.createElement("span");
+        spanLeftOverLifts.innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
+        tdQuickInfo.appendChild(spanLeftOverLifts);
+
+        let spanLeftOverUnits = document.createElement("span");
+        tdQuickInfo.appendChild(spanLeftOverUnits);
+        spanLeftOverUnits.innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
+
+        tr.appendChild(tdQuickInfo);
 
 
         tdLiftQty.textContent = unitsInLift;
@@ -232,11 +255,19 @@ function calculateOutput()
         tdFullLayers.textContent = partialSkidFullLayers;
         tr.appendChild(tdFullLayers);
 
+        tdFullSkidQty.textContent = unitsInFullSkids;
+        tr.appendChild(tdFullSkidQty);
+
+        tdPartialSkidQty.textContent = unitsInPartialSkid;
+        tr.appendChild(tdPartialSkidQty);
+
+
+
 
   
         let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
         dispatchArray.push(dispatch);
-        localStorage.setItem("jobs", dispatchArray);
+        localStorage.setItem("dispatches", dispatchArray);
     }
     
 
