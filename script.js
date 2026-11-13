@@ -16,8 +16,8 @@ let dispatchArray = [];
 
 let selectedJob = null;
 
-//localStorage.removeItem("jobs"); 
-//localStorage.removeItem("dispatches");
+// localStorage.removeItem("jobs"); 
+// localStorage.removeItem("dispatches");
 
 let currentJobId = 0;
 
@@ -166,12 +166,6 @@ function calculateOutput()
     let liftsInLayer = parseFloat(document.getElementById("lifts").value);
     let layersOnSkid = parseFloat(document.getElementById("layers").value);
 
-    
-
-
-
-
-
     if (selectedJob != null)
     {
         let dispatch = new Dispatch(id, stackType, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
@@ -180,6 +174,8 @@ function calculateOutput()
         
         
         let jobTableBody = document.getElementById("jobTableBody");
+
+        jobTableBody.replaceChildren();
 
         for (let i = 0; i < dispatchArray.length; i++)
         {
