@@ -32,9 +32,10 @@ class Job {
 }
 
 class Dispatch {
-    constructor(id, total, booksInLift, liftsInLayer, layersOnSkid, jobId)
+    constructor(id, stackType, total, booksInLift, liftsInLayer, layersOnSkid, jobId)
     {
         this.id = id;
+        this.stackType = stackType;
         this.total = total;
         this.booksInLift = booksInLift;
         this.liftsInLayer = liftsInLayer;
@@ -167,111 +168,101 @@ function calculateOutput()
 
     
 
-    let unitsInLayer = liftsInLayer * unitsInLift;
-    let unitsInSkid = unitsInLayer * layersOnSkid;
-    let fullSkids = Math.floor(total / unitsInSkid);
-
-    let unitsInFullSkids = fullSkids * unitsInSkid;
-    let unitsInPartialSkid = total - unitsInFullSkids;
-
-    let partialSkidFullLayers = Math.floor(unitsInPartialSkid / unitsInLayer);
-    let partialSkidUnitsinFullLayers = partialSkidFullLayers * unitsInLayer;
-    let partialSkidUnitsinPartialLayer = unitsInPartialSkid - partialSkidUnitsinFullLayers;
-
-    let partialSkidUnitsInFullLefoverLifts = Math.floor(partialSkidUnitsinPartialLayer / unitsInLift);
-    let partialSkidUnitsInLeftoverUnits = partialSkidUnitsinPartialLayer - (partialSkidUnitsInFullLefoverLifts * unitsInLift);
-
-    let stackTypeName;
-    if (stackType === "Downstack") {
-        stackTypeName = "Lifts";
-    } else if (stackType === "Carton Pack") {
-        stackTypeName = "Cartons";
-    }
 
 
-    // document.getElementById("calcOutput").style.visibility = "visible";
-    // document.querySelector(".id").textContent = `${id}`;
 
-    // document.querySelector(".full-skid-qty-quick").innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
-
-    
-    // document.querySelector(".partial-skid-full-layers").innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
-
-    // document.querySelector(".partial-skid-units-in-leftover-lifts").innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
-
-    // document.querySelector(".partial-skid-units-in-leftover-books").innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
-
-    // document.querySelector(".lift-qty").textContent = `${unitsInLift}`;
-    // document.querySelector(".lifts-in-layer").textContent = `${liftsInLayer}`;
-    // document.querySelector(".layer-qty").textContent = `${unitsInLayer}`;
-    // document.querySelector(".full-skid-qty").textContent = `${unitsInSkid}`;
-    // document.querySelector(".full-layers").textContent = `${layersOnSkid}`
-    // document.querySelector(".partial-skid-qty").textContent = `${unitsInPartialSkid}`;
 
     if (selectedJob != null)
     {
-        let jobTableBody = document.getElementById("jobTableBody");
-        let tr = document.createElement("tr");
-        jobTableBody.appendChild(tr);
-
-        let tdId = document.createElement("td");
-        let tdQuickInfo = document.createElement("td");
-        let tdLiftQty = document.createElement("td");
-        let tdLiftsInLayer = document.createElement("td");
-        let tdLayerQty = document.createElement("td");
-        let tdFullLayers = document.createElement("td");
-        let tdFullSkidQty = document.createElement("td");
-        let tdPartialSkidQty = document.createElement("td");
-
-        tdId.textContent = id;
-        tr.appendChild(tdId);
-
-        let dispatchStorage = localStorage.getItem("dispatches");
-
-        let spanFullSkids = document.createElement("span");
-        spanFullSkids.innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
-        tdQuickInfo.appendChild(spanFullSkids);
-
-        let spanFullLayers = document.createElement("span");
-        spanFullLayers.innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
-        tdQuickInfo.appendChild(spanFullLayers);
-        
-        let spanLeftOverLifts = document.createElement("span");
-        spanLeftOverLifts.innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
-        tdQuickInfo.appendChild(spanLeftOverLifts);
-
-        let spanLeftOverUnits = document.createElement("span");
-        tdQuickInfo.appendChild(spanLeftOverUnits);
-        spanLeftOverUnits.innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
-
-        tr.appendChild(tdQuickInfo);
-
-
-        tdLiftQty.textContent = unitsInLift;
-        tr.appendChild(tdLiftQty);
-
-        tdLiftsInLayer.textContent = liftsInLayer;
-        tr.appendChild(tdLiftsInLayer);
-
-        tdLayerQty.textContent = unitsInLayer;
-        tr.appendChild(tdLayerQty);
-
-        tdFullLayers.textContent = partialSkidFullLayers;
-        tr.appendChild(tdFullLayers);
-
-        tdFullSkidQty.textContent = unitsInFullSkids;
-        tr.appendChild(tdFullSkidQty);
-
-        tdPartialSkidQty.textContent = unitsInPartialSkid;
-        tr.appendChild(tdPartialSkidQty);
-
-
-
-        
-  
-        let dispatch = new Dispatch(id, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
+        let dispatch = new Dispatch(id, stackType, total, unitsInLift, liftsInLayer, layersOnSkid, selectedJob.jobId);
         dispatchArray.push(dispatch);
         localStorage.setItem("dispatches", JSON.stringify(dispatchArray));
+        
+        
+        let jobTableBody = document.getElementById("jobTableBody");
+
+        for (let i = 0; i < dispatchArray.length; i++)
+        {
+            let tr = document.createElement("tr");
+            jobTableBody.appendChild(tr);
+
+            let tdId = document.createElement("td");
+            let tdQuickInfo = document.createElement("td");
+            let tdLiftQty = document.createElement("td");
+            let tdLiftsInLayer = document.createElement("td");
+            let tdLayerQty = document.createElement("td");
+            let tdFullLayers = document.createElement("td");
+            let tdFullSkidQty = document.createElement("td");
+            let tdPartialSkidQty = document.createElement("td");
+
+            tdId.textContent = dispatchArray[i].id;
+            tr.appendChild(tdId);
+
+            let unitsInLayer = dispatchArray[i].liftsInLayer * dispatchArray[i].unitsInLift;
+            let unitsInSkid = unitsInLayer * dispatchArray[i].layersOnSkid;
+            let fullSkids = Math.floor(dispatchArray[i].total / unitsInSkid);
+
+            let unitsInFullSkids = fullSkids * unitsInSkid;
+            let unitsInPartialSkid = dispatchArray[i].total - unitsInFullSkids;
+
+            let partialSkidFullLayers = Math.floor(unitsInPartialSkid / unitsInLayer);
+            let partialSkidUnitsinFullLayers = partialSkidFullLayers * unitsInLayer;
+            let partialSkidUnitsinPartialLayer = unitsInPartialSkid - partialSkidUnitsinFullLayers;
+
+            let partialSkidUnitsInFullLefoverLifts = Math.floor(partialSkidUnitsinPartialLayer / dispatchArray[i].unitsInLift);
+            let partialSkidUnitsInLeftoverUnits = partialSkidUnitsinPartialLayer - (partialSkidUnitsInFullLefoverLifts * dispatchArray[i].unitsInLift);
+
+            let stackTypeName;
+            if (dispatchArray[i].stackType === "Downstack") {
+                stackTypeName = "Lifts";
+            } else if (dispatchArray[i].stackType === "Carton Pack") {
+                stackTypeName = "Cartons";
+            } 
+
+
+            let spanFullSkids = document.createElement("span");
+            spanFullSkids.innerHTML = (fullSkids !== 0) ? `<strong>${fullSkids}</strong> Skids<br>` : "";
+            tdQuickInfo.appendChild(spanFullSkids);
+
+            let spanFullLayers = document.createElement("span");
+            spanFullLayers.innerHTML = (partialSkidFullLayers !== 0) ? `<strong>${partialSkidFullLayers}</strong> Layers<br>` : "";
+            tdQuickInfo.appendChild(spanFullLayers);
+            
+            let spanLeftOverLifts = document.createElement("span");
+            spanLeftOverLifts.innerHTML = (partialSkidUnitsInFullLefoverLifts !== 0) ? `<strong>${partialSkidUnitsInFullLefoverLifts}</strong> ${stackTypeName}<br>` : "";
+            tdQuickInfo.appendChild(spanLeftOverLifts);
+
+            let spanLeftOverUnits = document.createElement("span");
+            tdQuickInfo.appendChild(spanLeftOverUnits);
+            spanLeftOverUnits.innerHTML = (partialSkidUnitsInLeftoverUnits !== 0) ? `<strong>${partialSkidUnitsInLeftoverUnits}</strong> Books` : "";
+
+            tr.appendChild(tdQuickInfo);
+
+
+            tdLiftQty.textContent = unitsInLift;
+            tr.appendChild(tdLiftQty);
+
+            tdLiftsInLayer.textContent = liftsInLayer;
+            tr.appendChild(tdLiftsInLayer);
+
+            tdLayerQty.textContent = unitsInLayer;
+            tr.appendChild(tdLayerQty);
+
+            tdFullLayers.textContent = partialSkidFullLayers;
+            tr.appendChild(tdFullLayers);
+
+            tdFullSkidQty.textContent = unitsInFullSkids;
+            tr.appendChild(tdFullSkidQty);
+
+            tdPartialSkidQty.textContent = unitsInPartialSkid;
+            tr.appendChild(tdPartialSkidQty);
+        }
+
+
+
+
+  
+
     }
     
 
