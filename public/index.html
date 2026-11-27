@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Page Title</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+              rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body class="container-md">
+        <script> var exports = {}; </script>
+        <header>
+            <h1>Backend Unit Converter </h1>
+        </header>
+        <section id="addDataBtnSection" class="mt-3">
+            <button id="quickCalcBtn" class="btn btn-primary">Quick Calc</button>
+            <button id="addJobDisplayBtn" class="btn btn-primary">Add Job</button>
+        </section>
+        <section id="addJobSection" class="row mt-3" style="display: none;">
+            <h2>Add Job</h2>
+            <form id="jobForm" class="col-md-4">
+                <div class="mb-1">
+                    <label for="jobNumber" class="form-label text-dark">Job Number</label>
+                    <input type="text" class="form-control" id="jobNumber" />
+                </div>
+                <div class="mb-1">
+                    <label for="jobName" class="form-label text-dark">Job Name</label>
+                    <input type="text" class="form-control" id="jobName" />
+                </div>
+                <button type="submit" class="btn btn-primary" id="addJobSubmitBtn">Submit</button>
+            </form>
+        </section>
+        <section id="jobsSelectSection" display="none" class="mt-3">
+            <h2>Jobs List</h2>
+            <ul id="jobsList" class="list-group">
+
+            </ul>
+        </section>
+        <section id="addDispatchSection" class="row mt-3" style="display: none;">
+            <h2 id="addDispatchHeader"></h2>
+            <form id="dispatchForm" class="col-md-3">
+                <div class="mb-1">
+                    <label for="dispatchId" class="form-label text-dark">Dispatch ID:</label>
+                    <input type="text" class="form-control" id="dispatchId" />
+                </div>
+                <div class="mb-1">
+                    <label for="stackType" class="form-label text-dark">Stack Type:</label> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault" checked>
+                        <label class="form-check-label" for="radioDefault">
+                            Stack Down
+                        </label>   
+                    </div> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault">
+                        <label class="form-check-label" for="radioDefault">
+                            Carton Pack
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <label for="totalQty" class="form-label text-dark">Total Quantity:</label>
+                    <input type="number" class="form-control" id="totalQty" />
+                </div>
+                <div class="mb-1">
+                    <label for="liftQty" class="form-label text-dark">Lift Quantity:</label>
+                    <input type="number" class="form-control" id="liftQty" />
+                </div>
+                <div class="mb-1">
+                    <label for="liftsInLayer" class="form-label text-dark">Lifts in Layer:</label>
+                    <input type="number" class="form-control" id="liftsInLayer" />
+                </div>
+                <div class="mb-1">
+                    <label for="layersOnSkid" class="form-label text-dark">Layers on Skid:</label>
+                    <input type="number" class="form-control" id="layersOnSkid" />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+        <section id="dispatchDisplaySection" style="display: none;">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Dispatch ID</th>
+                        <th scope="col">Dispatch Name</th>
+                        <th scope="col">Stack Type</th>
+                        <th scope="col">Total Quantity</th>
+                        <th scope="col">Lift Quantity</th>
+                        <th scope="col">Lifts in Layer</th>
+                        <th scope="col">Layers on Skid</th>
+                    </tr>
+                </thead>
+                <tbody id="dispatchTableBody">
+                </tbody>
+            </table>
+        </section>
+    </body>
+    
+    <script src="../dist/app.js"></script>
+    
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-+PW0IDVGGwmpaBQvcXY+W0BcpHpITFB3dSfSoGvDdHtLbrLpSbpGcvtQRM/BJpz+" crossorigin="anonymous"></script>
+</html>
