@@ -19,7 +19,7 @@ let baseUrl: string | undefined = fullUrl.toString().split("?")[0];
 let currentJobNameFromParams: string | null = fullUrl.searchParams.get("jobName");
 let currentJobNumberFromParams: string | null = fullUrl.searchParams.get("jobNumber");
 
-
+//Try to test if gitignore worked
 
 if (currentJobNameFromParams !== null && currentJobNumberFromParams !== null)
 {
