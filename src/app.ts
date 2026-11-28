@@ -31,7 +31,7 @@ if (currentJobNameFromParams !== null && currentJobNumberFromParams !== null)
     {
         jobNameHeader.textContent = "Job Name - " + currentJobNameFromParams?.replaceAll('-', ' ');
         jobNumberHeader.textContent = "Job Number - " + currentJobNumberFromParams;
-        addDispatchHeader.textContent = "Add dipatch to:"
+        addDispatchHeader.textContent = "Add calculation for dispatch to:"
     }
 } else {
     if (addDispatchSection !== null)
