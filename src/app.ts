@@ -127,7 +127,7 @@ if (addDispatchSection !== null && addJobSection !== null)
 }
 
 function DisplayJobsList(): void {
-    const jobsList: HTMLElement| null = document.getElementById("jobsList");
+    const jobsSelect: HTMLOptionElement| null = document.getElementById("jobsSelect") as HTMLOptionElement;
 
     if (jobsArray != null && jobsSelectSection != null)
     {
@@ -135,8 +135,8 @@ function DisplayJobsList(): void {
         {
             jobsSelectSection.style.display = "block";
 
-            while(jobsList?.firstChild)
-                jobsList.removeChild(jobsList.firstChild);
+            while(jobsSelect?.firstChild)
+                jobsSelect.removeChild(jobsSelect.firstChild);
 
         } else {
             jobsSelectSection.style.display = "none";
@@ -146,12 +146,13 @@ function DisplayJobsList(): void {
 
         for (let i = 0; i < jobsArray.length; i++)
         {
-            let jobsListNode: HTMLElement = document.createElement("li");
-            //jobsListNode.classList.add("list-group-item");
+            let jobsSelectNode: HTMLOptionElement = document.createElement("option");
+            jobsSelectNode.selected = true;
+            jobsSelectNode.value = "i";
 
             let linkUrl: string = baseUrl?.toString() + `?jobNumber=${jobsArray[i]?.jobNumber}` + `&jobName=${jobsArray[i]?.jobName.replaceAll(' ', '-')}`;
 
-            jobsListNode.innerHTML = `<a href=${linkUrl}>${jobsArray[i]?.jobNumber}</a> - ${jobsArray[i]?.jobName}`;
+            jobsSelectNode.innerHTML = `<a href=${linkUrl}>${jobsArray[i]?.jobNumber}</a> - ${jobsArray[i]?.jobName}`;
 
         //     let removeButton: HTMLButtonElement = document.createElement("button");
         //    removeButton.textContent = "X";
@@ -159,7 +160,7 @@ function DisplayJobsList(): void {
         //    removeButton.id = `${jobsArray[i]?.jobName}`;
         //    jobsListNode.appendChild(removeButton);
 
-            jobsList?.appendChild(jobsListNode);
+            jobsSelect?.appendChild(jobsSelectNode);
         }
     }
 }
